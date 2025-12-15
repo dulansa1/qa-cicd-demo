@@ -42,13 +42,6 @@ jobs:
           npx jest --ci --reporters=default --reporters=jest-junit
           echo "✅ Automated tests completed."
 
-      # 6️⃣ Upload JUnit test report to GitHub Actions
-      - name: Upload test report
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: junit.xml
-
 
 
 
