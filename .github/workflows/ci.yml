@@ -1,77 +1,77 @@
-name: QA CI Pipeline
-
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1️⃣ Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      # 3️⃣ Cache node_modules for faster builds
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # 4️⃣ Install dependencies
-      - name: Install dependencies
-        run: |
-          npm install
-          echo "✅ Dependencies installed."
-
-      # 5️⃣ Run automated tests with report generation
-      - name: Run automated tests
-        run: |
-          npx jest --ci --reporters=default --reporters=jest-junit
-          echo "✅ Automated tests completed."
-
-
-
-
-#Simple of previous version before edits:
-
 # name: QA CI Pipeline
 
 # on:
 #   push:
-#     branches: [ "main" ]
+#     branches: ["main"]
+#   pull_request:
+#     branches: ["main"]
 
 # jobs:
 #   test:
 #     runs-on: ubuntu-latest
 
 #     steps:
+#       # 1️⃣ Checkout code
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 
+#       # 2️⃣ Setup Node.js
 #       - name: Setup Node.js
 #         uses: actions/setup-node@v3
 #         with:
 #           node-version: '18'
 
+#       # 3️⃣ Cache node_modules for faster builds
+#       - name: Cache node_modules
+#         uses: actions/cache@v3
+#         with:
+#           path: node_modules
+#           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+#           restore-keys: |
+#             ${{ runner.os }}-node-
 
-
+#       # 4️⃣ Install dependencies
 #       - name: Install dependencies
-#         run: npm install
-#             echo "Dependencies installed."
+#         run: |
+#           npm install
+#           echo "✅ Dependencies installed."
 
+#       # 5️⃣ Run automated tests with report generation
 #       - name: Run automated tests
-#         run: npm test
-#             echo "Automated tests completed."
+#         run: |
+#           npx jest --ci --reporters=default --reporters=jest-junit
+#           echo "✅ Automated tests completed."
+
+
+
+
+#Simple of previous version before edits:
+
+name: QA CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+
+
+      - name: Install dependencies
+        run: npm install
+            echo "Dependencies installed."
+
+      - name: Run automated tests
+        run: npm test
+            echo "Automated tests completed."
