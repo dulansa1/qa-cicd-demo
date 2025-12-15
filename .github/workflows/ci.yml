@@ -67,11 +67,12 @@ jobs:
           node-version: '18'
 
 
-
       - name: Install dependencies
-        run: npm install
+        run: |
+            npm install
             echo "Dependencies installed."
 
       - name: Run automated tests
-        run: npm test
+        run: |
+            npm test
             echo "Automated tests completed."
